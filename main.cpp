@@ -161,7 +161,7 @@ int main() {
         std::string cmd;
         iss >> cmd;
 
-        if (cmd == "exit") {
+        if (cmd == "exit" || cmd == "q") {
             {
                 std::lock_guard<std::mutex> lock(writer_queue_mutex);
                 writer_stop = true;
@@ -230,6 +230,17 @@ int main() {
             std::lock_guard<std::mutex> lock(writer_queue_mutex);
             writer_tasks.push(WriterTask(WriterOperation::REVERSE));
             writer_queue_cv.notify_one();
+        }
+        else if (cmd == "help") {
+            std::lock_guard<std::mutex> lock(cout_mutex);
+            std::cout << "Available commands:\n"
+                    << "  insert <pos> <val> - Insert value at position\n"
+                    << "  remove <pos>       - Remove element\n"
+                    << "  sort asc|desc      - Sort ascending/descending\n"
+                    << "  reverse            - Reverse buffer\n"
+                    << "  read               - Print buffer\n"
+                    << "  count              - Count even/odd positions\n"
+                    << "  exit|q             - Exit program\n";
         }
         else {
             std::lock_guard<std::mutex> lock(cout_mutex);
