@@ -13,14 +13,14 @@
 ## Установка и запуск
 
 1. Клонируйте репозиторий:
-git clone <buffer_manager>
-cd <buffer_manager>
+```git clone <buffer_manager>```
+```cd <buffer_manager>```
 
 2. Соберите проект:
-make
+```make```
 
 3. Запустите программу:
-./buffer_manager
+```./buffer_manager```
 
 ## Основные операции
 ### Команда	Формат	Пример
